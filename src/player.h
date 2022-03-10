@@ -2,7 +2,7 @@
 
 struct Player
 {
-	float x = 100.f;
+	float x = 170.f;
 	float y = 100.f;
 	
 	float velX;
@@ -11,6 +11,7 @@ struct Player
 	bool grounded;
 
 	bool step(float dx, float dy);
+	bool sweep(float dx, float dy);
 	void update();
 	void draw();
 };

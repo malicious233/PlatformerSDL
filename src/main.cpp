@@ -5,6 +5,8 @@
 #include "player.h"
 #include "game.h"
 #include "collision.h"
+#include "block.h"
+#include "camera.h"
 
 int main()
 {
@@ -15,7 +17,9 @@ int main()
 	bool running = true;
 	Uint64 previous_ticks = SDL_GetPerformanceCounter();
 
+	Block block;
 
+	LoadMap();
  
 	while (running)
 	{
@@ -59,12 +63,22 @@ int main()
 		SDL_SetRenderDrawColor(render, 25, 25, 40, 255); 
 		SDL_RenderClear(render);
 
-		
+		//Render blocks
+		for (int i = 0; i < NUM_BLOCKS; i++)
+		{
+			Block* block = blocks[i];
+			if (block == nullptr)
+				continue;
+
+			block->draw();
+		}
 
 		//Draw and update player
 		player.update();
 		player.draw();
 
+		//Update camera
+		camera.update();
 
 		SDL_RenderPresent(render);
  
